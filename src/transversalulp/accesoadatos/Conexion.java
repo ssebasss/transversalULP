@@ -17,11 +17,10 @@ import java.sql.Connection;
  */
 public class Conexion {
     private static final String URL = "jdbc:mariadb://localhost:3308/tp13_ulp";
-//    private static final String DB = "tp13_ulp";
     private static final String USUARIO = "root";
     private static  String PASSWORD = "";
     private static Connection conexion;
-  //  private static DriverManager Connection;
+
 
     private Conexion() {
     }
@@ -33,7 +32,7 @@ public class Conexion {
             Class.forName("org.mariadb.jdbc.Driver");
            //conectar BD
           conexion = DriverManager.getConnection(URL , USUARIO, PASSWORD); 
-                 System.out.println("conectada BD");
+           System.out.println("conectada BD");
         }catch(ClassNotFoundException cnf){
             JOptionPane.showMessageDialog(null,"Error al cargar driver");                     
         } catch (SQLException ex) {

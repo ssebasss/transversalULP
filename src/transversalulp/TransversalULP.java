@@ -80,10 +80,10 @@ public class TransversalULP {
       
       
        AlumnoData alumnosData= new AlumnoData();
-List<Alumno> listaAlumnos = alumnosData.listaAlumnos();
+        List<Alumno> listaAlumnos = alumnosData.listaAlumnos();
 
 for (Alumno alumno : listaAlumnos) {
-    System.out.println(" Nombre: " + alumno.getNombre() + ", Apellido "+ alumno.getApellido()+" ID: " + alumno.getIdAlumno() + ", DNI: " + alumno.getDni()  );
+    System.out.println(", Nombre: " + alumno.getNombre() + ", Apellido "+ alumno.getApellido()+" ID: " + alumno.getIdAlumno() + ", DNI: " + alumno.getDni()  );
 }
 
       
