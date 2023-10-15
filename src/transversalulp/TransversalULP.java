@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transversalulp.accesoadatos.AlumnoData;
@@ -53,15 +54,38 @@ public class TransversalULP {
      
             //  mostrar WACHOS por ID
             
-     Alumno alumnoEncontrado=alumnoData.buscarAlumnoPorId(1);
-     
-        System.out.println("DATOS ALUMNO ENCONTRADO ");
-        System.err.println("    ");
-        System.out.println("DNI"+ alumnoEncontrado.getDni());
-        System.out.println("Nombre: "+ alumnoEncontrado.getNombre());
-        System.out.println("Apellido: "+ alumnoEncontrado.getApellido());
-     
-     
+//        Alumno alumnoEncontradoID=alumnoData.buscarAlumnoPorId(1);
+//        System.out.println("-------------DATOS ALUMNO ENCONTRADO ID-----------------");
+//        System.out.println("    ");
+//        System.out.println("DNI"+ alumnoEncontradoID.getDni());
+//        System.out.println("Nombre: "+ alumnoEncontradoID.getNombre());
+//        System.out.println("Apellido: "+ alumnoEncontradoID.getApellido());
+//        System.out.println("    ");
+
+      //  mostrar WACHOS por DNI
+      
+//      Alumno alumnoEncontradoDNI=alumnoData.buscarAlumnoPorDni(32751489);
+//        if (alumnoEncontradoDNI!=null) {
+//            System.out.println("------------DATOS ALUMNO ENCONTRADO DNI-----------------");
+//        System.out.println("    ");
+//        
+//        System.out.println("Nombre: "+ alumnoEncontradoDNI.getNombre());
+//        System.out.println("Apellido: "+ alumnoEncontradoDNI.getApellido());
+//        System.out.println("DNI: "+ alumnoEncontradoDNI.getDni());
+//        }else{
+//            System.out.println("no encontré nada che...");
+//        }
+        
+       //  mostrar WACHOS
+      
+      
+       AlumnoData alumnosData= new AlumnoData();
+List<Alumno> listaAlumnos = alumnosData.listaAlumnos();
+
+for (Alumno alumno : listaAlumnos) {
+    System.out.println(" Nombre: " + alumno.getNombre() + ", Apellido "+ alumno.getApellido()+" ID: " + alumno.getIdAlumno() + ", DNI: " + alumno.getDni()  );
+}
+
       
       
     }

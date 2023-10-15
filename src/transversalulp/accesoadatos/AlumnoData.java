@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import transversalulp.entidades.Alumno;
 
@@ -108,7 +110,8 @@ public class AlumnoData {
     }
      
      
-        public Alumno buscarAlumnoPorId(int idAlumno) {
+       
+     public Alumno buscarAlumnoPorId(int idAlumno) {
         Alumno alumno = null;
         String query = "SELECT * FROM alumno WHERE idAlumno = ?";
         
@@ -133,13 +136,100 @@ public class AlumnoData {
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            // Maneja la excepción según tus necesidades, como lanzar una excepción personalizada, etc.
+           
         }
         
         return alumno;
     }
      
      
+     
+        
+   public Alumno buscarAlumnoPorDni(int dni) {
+        Alumno alumno = null;
+        String query = "SELECT * FROM alumno WHERE dni = ?";
+        
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setInt(1, dni);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int idAlumno = resultSet.getInt("iDalumno");
+                String apellido = resultSet.getString("apellido");
+                String nombre = resultSet.getString("nombre");
+                java.sql.Date fechaNacimiento = resultSet.getDate("fechaNacimiento");
+                boolean estado = resultSet.getBoolean("estado");
+
+                // Construyo objeto Alumno con los datos que saque de la base de datos
+                alumno = new Alumno();
+                alumno.setDni(dni);
+                alumno.setApellido(apellido);
+                alumno.setNombre(nombre);
+                alumno.setFechaNac(fechaNacimiento.toLocalDate());
+                alumno.setActivo(estado);
+                alumno.setIdAlumno(idAlumno);
+            }
+            
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        }
+        
+        return alumno;
+    }
+        
+        
+    
+      public List<Alumno> listaAlumnos() {
+        List<Alumno> listaAlumnos = new ArrayList<>();
+        String query = "SELECT * FROM alumno WHERE estado = 1";
+        
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                int idAlumno = resultSet.getInt("iDalumno");
+                int dni = resultSet.getInt("dni");
+                String apellido = resultSet.getString("apellido");
+                String nombre = resultSet.getString("nombre");
+                java.sql.Date fechaNacimiento = resultSet.getDate("fechaNacimiento");
+                boolean estado = resultSet.getBoolean("estado");
+
+                Alumno alumno = new Alumno();
+                alumno.setIdAlumno(idAlumno);
+                alumno.setDni(dni);
+                alumno.setApellido(apellido);
+                alumno.setNombre(nombre);
+                alumno.setFechaNac(fechaNacimiento.toLocalDate());
+                alumno.setActivo(estado);
+                
+                listaAlumnos.add(alumno);
+            }
+            
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Maneja la excepción según tus necesidades, como lanzar una excepción personalizada, etc.
+        }
+        
+        return listaAlumnos;
+    }
+      
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        
 }
 
 
